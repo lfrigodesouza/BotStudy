@@ -1,0 +1,18 @@
+{
+    "name": "BotTutorial",
+    "description": "",
+    "services": [
+        {
+            "type": "endpoint",
+            "appId": "",
+            "appPassword": "",
+            "endpoint": "http://localhost:3978/api/messages",
+            "id": "cd6aead0-bb89-11e8-8665-0d035147a9eb",
+            "name": "http://localhost:3978/api/messages"
+        }
+    ],
+    "secretKey": "",
+    "version": "2.0",
+    "overrides": null,
+    "path": "D:\\Repos\\BotStudy\\BotTutorial\\BotTutorial.bot"
+}
