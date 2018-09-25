@@ -16,7 +16,8 @@ namespace BotTutorial.Dialogs
         public long age { get; set; }
         public async Task StartAsync(IDialogContext context)
         {
-            await context.PostAsync("Thanks for using the bot. </br>Please inform some data:");
+            await context.PostAsync("Thanks for using the bot. " +
+                "Please inform some data:");
             context.Wait(GetNameAsync);
         }
 
@@ -37,7 +38,10 @@ namespace BotTutorial.Dialogs
                 context: context,
                 resume: ResumeGetAge,
                 prompt: $"{name}, please entrer your Age",
-                retry: "Sorry I didn't understand"
+                retry: "Sorry I didn't understand",
+                attempts: 3,
+                min: 18,
+                max: 50
                 );
         }
 
@@ -47,8 +51,11 @@ namespace BotTutorial.Dialogs
             PromptDialog.Confirm(
                 context: context,
                 resume: ResumeConfirm,
-                prompt: $"Your name is {name} and your age is {age}, right?",
-                retry: "Sorry I didn't understand"
+                prompt: $"Your name is *{name}* and your age is *{age}*, right?",
+                retry: "Sorry I didn't understand",
+                options: new string[] {"Yeah", "Nah"},
+                promptStyle: PromptStyle.PerLine
+
                 );
         }
 
@@ -56,7 +63,7 @@ namespace BotTutorial.Dialogs
         {
            if(await result)
             {
-                await context.PostAsync("You are registered! </br>");
+                await context.PostAsync($"**{name}**, You are registered!");
             }
             else
             {

@@ -3,6 +3,7 @@ using System.Net.Http;
 using System.Threading.Tasks;
 using System.Web.Http;
 using Microsoft.Bot.Builder.Dialogs;
+using Microsoft.Bot.Builder.FormFlow;
 using Microsoft.Bot.Connector;
 
 namespace BotTutorial
@@ -21,7 +22,8 @@ namespace BotTutorial
                 //await Conversation.SendAsync(activity, () => new Dialogs.RootDialog());
                 //await Conversation.SendAsync(activity, () => new Dialogs.WelcomeDialog());
                 //await Conversation.SendAsync(activity, () => Dialogs.HelloDialogChain.dialog);
-                await Conversation.SendAsync(activity, () => new Dialogs.PromptDemo());
+                //await Conversation.SendAsync(activity, () => new Dialogs.PromptDemo());
+                await Conversation.SendAsync(activity, MakeDialog);
             }
             else
             {
@@ -29,6 +31,11 @@ namespace BotTutorial
             }
             var response = Request.CreateResponse(HttpStatusCode.OK);
             return response;
+        }
+
+        private IDialog<Dialogs.FormFlowDemo> MakeDialog()
+        {
+            return Chain.From(() => FormDialog.FromForm(Dialogs.FormFlowDemo.GetForm));
         }
 
         private Activity HandleSystemMessage(Activity message)

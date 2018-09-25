@@ -151,6 +151,7 @@
   <ItemGroup>
     <Compile Include="App_Start\WebApiConfig.cs" />
     <Compile Include="Controllers\MessagesController.cs" />
+    <Compile Include="Dialogs\FormFlowDemo.cs" />
     <Compile Include="Dialogs\HelloDialogChain.cs" />
     <Compile Include="Dialogs\PromptDemo.cs" />
     <Compile Include="Dialogs\RootDialog.cs" />
