@@ -7,13 +7,15 @@ using Microsoft.Bot.Builder.Dialogs;
 
 namespace BotTutorial.Dialogs
 {
-    public enum LaptopBrand
-    {
-        HP, Dell, Acer, Microsoft
-    }
+
     public enum LaptopType
     {
         Laptop, Gaming, Ultrabook, Notebook
+    }
+
+    public enum LaptopBrand
+    {
+        HP, Dell, Acer, Microsoft
     }
 
     public enum LaptopOS
@@ -23,12 +25,15 @@ namespace BotTutorial.Dialogs
 
     public enum LaptopProcessor
     {
+        [Describe(description: "Intel Core I3")]
         IntelCoreI3, IntelCoreI5, IntelCorei7, IntemCodeI9, ADMDual, ARM
     }
 
     [Serializable]
     public class FormFlowDemo
     {
+        [Optional]
+        [Describe(description: "Company", title: "Laptop Brand", subTitle: "There are meny brands available")]
         public LaptopBrand? LaptopBrand { get; set; }
         public LaptopType? LaptopType { get; set; }
         public LaptopOS? LaptopOS { get; set; }
@@ -36,7 +41,12 @@ namespace BotTutorial.Dialogs
 
         public bool? RequireTouch { get; set; }
 
-        public int? MinimumRAMSize { get; set; }
+        [Pattern(@"^\d\d{3,4}(-{0,1}| {0,1})\d{4}$")]
+        public string UserMobileNo { get; set; }
+
+        [Numeric(2, 12)]
+        [Describe(description: "Minimum capacity of RAM")]
+        public int? MinimumRamSize { get; set; }
 
         public static IForm<FormFlowDemo> GetForm()
         {
